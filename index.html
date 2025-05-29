@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fruit Ninja Clone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* GENERAL STYLES */
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #111;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    /* HEADER BAR */
+    #gameHeader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 15;
+      padding: 10px 0;
+      background: rgba(255, 105, 180, 0.07);
+      border-bottom: 2px solid hotpink;
+      box-shadow: 0 2px 12px hotpink;
+      animation: pulse 2s infinite alternate;
+    }
+
+    /* SCORE inside header */
+    #score {
+      position: absolute;
+      left: 20px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      background: rgba(255, 105, 180, 0.1);
+      padding: 8px 18px;
+      border: 2px solid hotpink;
+      border-radius: 12px;
+      text-shadow: 0 0 5px hotpink, 0 0 10px deeppink;
+      box-shadow: 0 0 10px hotpink;
+      animation: pulse 1s infinite alternate;
+      user-select: none;
+    }
+
+    #gameHeader img {
+      height: 40px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px hotpink);
+    }
+
+    /* GAME OVER SCREEN */
+    #gameOverScreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 10, 0.85);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+    }
+
+    #gameOverText {
+      color: hotpink;
+      font-size: 64px;
+      text-shadow: 0 0 10px hotpink, 0 0 20px deeppink;
+      margin-bottom: 30px;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    #refreshButton {
+      font-size: 20px;
+      padding: 12px 28px;
+      background: rgba(255, 105, 180, 0.15);
+      border: 2px solid hotpink;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      text-shadow: 0 0 5px hotpink;
+      box-shadow: 0 0 10px hotpink;
+      animation: pulse 1s infinite alternate;
+      transition: transform 0.2s ease;
+    }
+
+    #refreshButton:hover {
+      transform: scale(1.05);
+      background: rgba(255, 105, 180, 0.25);
+    }
+
+    /* PULSE ANIMATION */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px hotpink, 0 0 20px deeppink;
+      }
+      100% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px hotpink, 0 0 35px deeppink;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Bar -->
+  <div id="gameHeader">
+    <div id="score">Score: 0</div>
+    <img src="assets/suc-logo.webp" alt="Succinct Logo" />
+  </div>
+
+  <!-- Game Canvas -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- Game Over Screen -->
+  <div id="gameOverScreen">
+    <div id="gameOverText">GAME OVER</div>
+    <button id="refreshButton" onclick="location.reload()">Refresh</button>
+  </div>
+
+  <!-- JS -->
+  <script src="game.js"></script>
+</body>
+</html>
