@@ -34,14 +34,12 @@
       animation: pulse 2s infinite alternate;
     }
 
-    /* SCORE inside header */
     #score {
       position: absolute;
       left: 20px;
       color: white;
       font-size: 20px;
       font-weight: bold;
-      font-family: 'Orbitron', sans-serif;
       background: rgba(255, 105, 180, 0.1);
       padding: 8px 18px;
       border: 2px solid hotpink;
@@ -59,18 +57,19 @@
     }
 
     /* GAME OVER SCREEN */
-    #gameOverScreen {
+    #gameOverScreen,
+    #startScreen {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: rgba(10, 10, 10, 0.85);
-      display: none;
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 20;
+      z-index: 30;
     }
 
     #gameOverText {
@@ -81,7 +80,8 @@
       animation: pulse 1.5s infinite alternate;
     }
 
-    #refreshButton {
+    .neonButton {
+      font-family: 'Orbitron', sans-serif;
       font-size: 20px;
       padding: 12px 28px;
       background: rgba(255, 105, 180, 0.15);
@@ -95,7 +95,7 @@
       transition: transform 0.2s ease;
     }
 
-    #refreshButton:hover {
+    .neonButton:hover {
       transform: scale(1.05);
       background: rgba(255, 105, 180, 0.25);
     }
@@ -124,13 +124,29 @@
   <!-- Game Canvas -->
   <canvas id="gameCanvas"></canvas>
 
+  <!-- Start Screen -->
+  <div id="startScreen">
+    <button class="neonButton" onclick="startGame()">Start Game</button>
+  </div>
+
   <!-- Game Over Screen -->
-  <div id="gameOverScreen">
+  <div id="gameOverScreen" style="display: none;">
     <div id="gameOverText">GAME OVER</div>
-    <button id="refreshButton" onclick="location.reload()">Refresh</button>
+    <button class="neonButton" onclick="location.reload()">Refresh</button>
   </div>
 
   <!-- JS -->
+  <script>
+    let gameStarted = false;
+
+    function startGame() {
+      document.getElementById('startScreen').style.display = 'none';
+      if (!gameStarted) {
+        gameStarted = true;
+        gameLoop();
+      }
+    }
+  </script>
   <script src="game.js"></script>
 </body>
 </html>
