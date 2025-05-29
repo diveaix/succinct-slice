@@ -11,6 +11,8 @@ const gravity = 0.2;
 const swipeTrail = [];
 const dangerNames = ['nair', 'crashout'];
 let gameOver = false;
+let spawnIntervalId = null;
+let loopStarted = false;
 
 const characterNames = [
   'adendavid', 'adetola', 'bigbruh', 'crashout', 'drdappfa', 'enspire',
@@ -95,7 +97,7 @@ function drawSwipeTrail() {
     ctx.lineTo(p2.x, p2.y);
   }
 
-  ctx.strokeStyle = 'rgba(255, 105, 180, 0.9)'; // vibrant pink
+  ctx.strokeStyle = 'rgba(255, 105, 180, 0.9)';
   ctx.lineWidth = 5;
   ctx.shadowColor = 'rgba(255, 105, 180, 0.6)';
   ctx.shadowBlur = 12;
@@ -104,7 +106,6 @@ function drawSwipeTrail() {
   ctx.shadowBlur = 0;
 }
 
-// Swipe Handling
 let isSwiping = false;
 
 canvas.addEventListener('mousedown', (e) => {
@@ -219,5 +220,11 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-setInterval(spawnFruit, 1000);
-gameLoop();
+function startGame() {
+  document.getElementById('startScreen').style.display = 'none';
+  if (!loopStarted) {
+    loopStarted = true;
+    spawnIntervalId = setInterval(spawnFruit, 1000);
+    gameLoop();
+  }
+}
